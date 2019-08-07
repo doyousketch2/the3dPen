@@ -7,16 +7,15 @@ created in gEdit
 
 ---
 
-I looked at the Tic-80 code for  
+To figure out 3D rotations, I looked at Tic-80 code for  
 FlamingPandas > Demos > MODELRENDERER  
-to figure out the 3D rotations.  
 https://tic.computer/play?cart=415
 
 Already had an idea of how to do it,  
 but sometimes it's hard to keep track of which is which  
 with the sin() and cos() of the various X Y Z combinations.  
 
-It's not a direct copy, but yea, I looked at that one  
+It's not a direct copy, but yea, looked at that one  
 to keep all the rotations facing the right way.
 
 Tho I might reverse the Z axis, so - is Down and + is Up;  we'll see.
