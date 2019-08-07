@@ -65,7 +65,7 @@ https://www.youtube.com/watch?v=S4eNl1rA1Ns
 
 Here's a playlist that breaks down the steps involved.  
 Make your own game - by goature  
-https://www.youtube.com/playlist?list=PL924F20B05A624D91
+https://www.youtube.com/playlist?list=PL924F20B05A624D91  
 I got the simple gamestate-management from his vid 14.
 
 
@@ -104,7 +104,7 @@ https://stackoverflow.com/questions/tagged/lua
 Tic-80 carts have good code.
 
 To a lesser degree, Pico8 carts might be of some use,  
-https://www.lexaloffle.com/bbs/?cat=7&sub=2&mode=carts
+https://www.lexaloffle.com/bbs/?cat=7&sub=2&mode=carts  
 But you have to be aware there will be specifics that won't transfer well.
 
 ---
