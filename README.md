@@ -7,9 +7,9 @@ created in gEdit
 
 ---
 
-I looked at the Tic-80 code for
-FlamingPandas > Demos > MODELRENDERER
-to figure out the 3D rotations.
+I looked at the Tic-80 code for  
+FlamingPandas > Demos > MODELRENDERER  
+to figure out the 3D rotations.  
 https://tic.computer/play?cart=415
 
 Already had an idea of how to do it,  
