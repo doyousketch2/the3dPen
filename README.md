@@ -18,7 +18,7 @@ with the sin() and cos() of the various X Y Z combinations.
 It's not a direct copy, but yea, looked at that one  
 to keep all the rotations facing the right way.
 
-Tho I might reverse the Z axis, so - is Down and + is Up;  we'll see.
+Tho I might reverse the Y axis, so - is Down and + is Up;  we'll see.
 
 ---
 To use this, you'll need Löve2d
