@@ -35,8 +35,14 @@ h66  = HH *0.667                    h75  = HH *0.75
 
 timer  = 0
 
-fontstyle1  = 'data/fonts/C64_Pro-STYLE.ttf'
-fontstyle2  = 'data/fonts/iosevka-term-bold.ttf'
+--  modules do fine w/ one platform independent  .  for a folder separator,
+--  but not when traversing futher down subdirectories.  not sure why.
+--  so we have to find the system's preferred separator, and use that.
+
+separator  = package .config :sub( 1, 1 )
+
+fontstyle1  = 'data' ..separator ..'fonts' ..separator ..'C64_Pro-STYLE.ttf'
+fontstyle2  = 'data' ..separator ..'fonts' ..separator ..'iosevka-term-bold.ttf'
 
 xsmallFontSize   = 10
 smallFontSize   = 12

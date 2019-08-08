@@ -1,4 +1,7 @@
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+local model  = ''
+local models  = {  'data' ..separator ..'models' ..separator ..'model'  }
+local currentModel  = 1
 
 local function calculate_color( verts )
   table .sort(  verts,  function( a, b ) return a.z < b.z end  )  --  Z-sort
@@ -11,9 +14,46 @@ local function calculate_color( verts )
   return verts
 end  --  calculate_color()
 
+local function resetModel()
+  verts  = {}
+  pitch,  yaw,  roll,  zoom  = 0,  0,  0,  math.min( w2, h2 )
+  horiz_offset,  vert_offset  = 0,  0
+
+  for i = 1,  #model do
+    verts[i]  = {}
+    verts[i] .x  = model[i] .x *zoom
+    verts[i] .y  = model[i] .y *zoom
+    verts[i] .z  = model[i] .z *zoom
+    verts[i] .initial_size  = model[i] .initial_size
+
+    verts[i] .radius  = (verts[i] .z +zoom *50) /1000 +verts[i] .initial_size
+  end  --  #model
+  verts  = calculate_color( verts )
+
+  zoom  = 100  --  make it say 100 % after model is loaded, regardless of initial normalized value
+end  --  resetView()
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function load()
+  dir  = 'data' ..separator ..'models'
+  local dirItems  = fil .getDirectoryItems( dir )
+
+  for _, item in ipairs( dirItems ) do
+    print(item)
+    if item :sub( -4 ) == '.lua' then  --  if a .lua file
+      filename  = item :sub( 1, -5 )  --  strip extension
+      print(filename)
+      if filename ~= 'model' then
+        models[ #models +1 ]  = dir ..'.' ..filename
+      end  --  add .lua modules beyond the original model
+
+    end  --  .lua
+  end  --  ipairs
+
+  for i, v in ipairs( models ) do
+    print(i, v)
+  end
+
   --  gra .setBackgroundColor( { 0.5, 0.5, 0.5 }  )
   gra .setFont( smallFont )
   pitch,  yaw,  roll  = 0,  0,  0
@@ -28,7 +68,7 @@ function load()
 
   verts  = {}
   segments  = 12  --  resolution of circles
-  require 'data.model'
+  model  = require ( models[ currentModel ] )
 
   for i = 1,  #model do
     verts[i]  = {}
@@ -53,6 +93,13 @@ end  --  load()
 function Lo .keypressed( key, scancode, isrepeat ) -- action continues while key pressed
   if scancode == 'escape' then
     eve .quit()
+
+  elseif scancode == 'return' then  --  next model
+    currentModel  = currentModel +1
+    if currentModel > #models then currentModel  = 1 end
+    model  = require ( models[ currentModel ] )
+    resetModel()
+
   end  --  if scancode...
 end -- Lo .keypressed()
 
@@ -63,20 +110,7 @@ function Lo .update( dt ) -- DeltaTime  = time since last update,  in seconds.
   --timer  = timer +dt
 
   if key .isDown( 'space' ) then  --  reset view
-    pitch,  yaw,  roll,  zoom  = 0,  0,  0,  math.min( w2, h2 )
-    horiz_offset,  vert_offset  = 0,  0
-
-    for i = 1,  #model do  --  reset model
-      verts[i] .x  = model[i] .x *zoom
-      verts[i] .y  = model[i] .y *zoom
-      verts[i] .z  = model[i] .z *zoom
-      verts[i] .initial_size  = model[i] .initial_size
-
-      verts[i] .radius  = (verts[i] .z +zoom *50) /1000 +verts[i] .initial_size
-    end  --  #model
-    verts  = calculate_color( verts )
-
-    zoom  = 100  --  make it say 100 % after model is loaded, regardless of initial normalized value
+    resetModel()
   end  --  space
 
   --  rotation
