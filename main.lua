@@ -11,7 +11,7 @@ author  = 'Doyousketch2'
  -- initial love .load() function,  individual gamestates simply use load() to initialize.
 
 function Lo .load()
-  print('Löve app begin:  ' ..title )
+  print( 'Löve app begin:  ' ..title )
 
   for i = 1,  #arg do -- 'arg' is a list of all the args,  so iterate through it.
     local ar  = arg[i]

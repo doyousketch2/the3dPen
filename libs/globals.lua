@@ -33,16 +33,11 @@ h66  = HH *0.667                    h75  = HH *0.75
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- typically, local variables are faster, so use them when you can.
 
+major, minor, revision, codename  = love .getVersion()
 timer  = 0
 
---  modules do fine w/ one platform independent  .  for a folder separator,
---  but not when traversing futher down subdirectories.  not sure why.
---  so we have to find the system's preferred separator, and use that.
-
-separator  = package .config :sub( 1, 1 )
-
-fontstyle1  = 'data' ..separator ..'fonts' ..separator ..'C64_Pro-STYLE.ttf'
-fontstyle2  = 'data' ..separator ..'fonts' ..separator ..'iosevka-term-bold.ttf'
+fontstyle1  = 'data/fonts/C64_Pro-STYLE.ttf'
+fontstyle2  = 'data/fonts/iosevka-term-bold.ttf'
 
 xsmallFontSize   = 10
 smallFontSize   = 12
@@ -74,6 +69,13 @@ black  = { 0, 0, 0 }
 cBlue  = c255( 62, 49, 162 )
 ltBlue = c255( 124, 112, 218 )
 white  = { 1, 1, 1 }
+
+if major < 11 then
+  cBlue  = { 62, 49, 162 }
+  ltBlue = { 124, 112, 218 }
+  white  = { 255, 255, 255 }
+end
+
 
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- stackoverflow.com/questions/9168058/how-to-dump-a-table-to-console

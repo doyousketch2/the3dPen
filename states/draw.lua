@@ -1,16 +1,26 @@
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 local model  = ''
-local models  = {  'data' ..separator ..'models' ..separator ..'model'  }
+local models  = {  'data/models/model'  }
 local currentModel  = 1
 local pastPointSize  = 0
+
 
 local function calculate_color( verts )
   table .sort(  verts,  function( a, b ) return a.z < b.z end  )  --  Z-sort
 
-  for i = 1,  #verts do
-    local c  = i /#verts
-    verts[i] .color  = {  c,  c *0.9,  c *0.9  }
-  end  --  #verts
+  if major > 10 then  --  versions after 10 have color range 0-1
+    for i = 1,  #verts do
+      local c  = i /#verts
+      verts[i] .color  = {  c,  c *0.9,  c *0.9  }
+    end  --  #verts
+
+  else  --  version before 11, so color is range 0-255
+
+    for i = 1,  #verts do
+      local c  = i /#verts
+      verts[i] .color  = {  c *255,  c *200,  c *200  }
+    end  --  #verts
+  end  --  major version before or after 10
 
   return verts
 end  --  calculate_color()
@@ -38,7 +48,7 @@ end  --  resetView()
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function load()
-  dir  = 'data' ..separator ..'models'
+  dir  = 'data/models'
   local dirItems  = fil .getDirectoryItems( dir )
 
   for _, item in ipairs( dirItems ) do
@@ -274,7 +284,11 @@ function Lo .draw()
         pastPointSize  = verts[i] .radius
       end
 
-      gra .points( xx, yy )
+      if major < 10 then
+        gra .point( xx, yy )
+      else
+        gra .points( xx, yy )
+      end
 
       --  gra .print( i,  xx +text_offset,  yy +text_offset )  --  print Z-order numbers
   end --  #verts
