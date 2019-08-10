@@ -2,6 +2,7 @@
 local model  = ''
 local models  = {  'data' ..separator ..'models' ..separator ..'model'  }
 local currentModel  = 1
+local pastPointSize  = 0
 
 local function calculate_color( verts )
   table .sort(  verts,  function( a, b ) return a.z < b.z end  )  --  Z-sort
@@ -13,6 +14,7 @@ local function calculate_color( verts )
 
   return verts
 end  --  calculate_color()
+
 
 local function resetModel()
   verts  = {}
@@ -32,6 +34,7 @@ local function resetModel()
 
   zoom  = 100  --  make it say 100 % after model is loaded, regardless of initial normalized value
 end  --  resetView()
+
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function load()
@@ -264,7 +267,14 @@ function Lo .draw()
       end  --  if i
 
       --  .circle( mode, x, y, radius, segments )
-      gra .circle(  'fill',  xx,  yy,  verts[i] .radius,  verts[i] .radius +5  )
+      -- gra .circle(  'fill',  xx,  yy,  verts[i] .radius,  verts[i] .radius +5  )
+
+      if pastPointSize ~= verts[i] .radius then
+        gra .setPointSize( verts[i] .radius )
+        pastPointSize  = verts[i] .radius
+      end
+
+      gra .points( xx, yy )
 
       --  gra .print( i,  xx +text_offset,  yy +text_offset )  --  print Z-order numbers
   end --  #verts
