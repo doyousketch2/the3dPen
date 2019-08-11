@@ -1,3 +1,13 @@
+Available since LÖVE 0.9.2
+
+0.9.2 has keycodes in the   love.keypressed( key, scancode, isrepeat )
+callback function, however, that constantly ticks every cycle.
+
+love.keyboard.isScancodeDown( scancode, ... ) --  didn't exist 'till ver 0.10.0
+
+https://love2d.org/wiki/Scancode
+https://love2d.org/wiki/KeyConstant
+--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 escape     f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
 
@@ -8,7 +18,10 @@ capslock    a   s   d   f   g   h   j   k   l   ;   '     return
 
 lctrl     lgui     lalt     space     ralt     rgui     rctrl
 
---~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In v0.9.2 and earlier space is represented by the actual space character ' '
+love.keyboard.isDown( 'space', ' ' )
+--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 printscreen     scrolllock     pause
 
@@ -17,7 +30,7 @@ delete        end            pagedown
 
 up   down   left   right
 
---~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 numlock   kp/   kp*   kp-
 

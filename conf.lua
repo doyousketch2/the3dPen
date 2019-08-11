@@ -1,3 +1,5 @@
+io .stdout :setvbuf('no')  -- Attach a console to Windows
+
 function love .conf(t)
   local w  = t .window
   local m  = t .modules
@@ -8,8 +10,8 @@ function love .conf(t)
   w .width  = 640
   w .height = 480
   w .vsync  = true                     -- Enable vertical sync  (boolean)
-
-  t .version  = '11.1'                 -- LÖVE version this game was made for
+  -- t .console  = true                -- Attach a console (boolean, Windows only)
+  -- t .version  = '11.1'              -- LÖVE version this game was made for
 
   t .identity  = 'theTemplate'         -- Name of the save directory
   t .externalstorage  = false          -- Read & write from external storage on Android
